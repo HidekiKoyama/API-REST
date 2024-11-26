@@ -1,0 +1,6 @@
+--upgrade pip
+psycopg[binary]
+flask
+python-dotenv
+psycopg[c]
+
