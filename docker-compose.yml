@@ -4,8 +4,8 @@ services:
   db:
     image: postgres:13
     environment:
-      POSTGRES_USER: ${DBUSER}
-      POSTGRES_PASSWORD: ${DBPASSWORD}
-      POSTGRES_DB: ${DBNAME}
+      POSTGRES_USER: ${POSTGRES_DBUSER}
+      POSTGRES_PASSWORD: ${POSTGRES_DBPASSWORD}
+      POSTGRES_DB: ${POSTGRES_DBNAME}
     ports:
       - "5432:5432"
