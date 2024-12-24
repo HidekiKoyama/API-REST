@@ -1,0 +1,11 @@
+#sudo dockerd &
+version: '3.8'  # Certifique-se de incluir a versão
+services:
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: ${DBUSER}
+      POSTGRES_PASSWORD: ${DBPASSWORD}
+      POSTGRES_DB: ${DBNAME}
+    ports:
+      - "5432:5432"
