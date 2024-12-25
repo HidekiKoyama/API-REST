@@ -35,7 +35,7 @@ class PostgresSQL(DatabaseConection):
     conn = self.connect_db()
     cursor = conn.cursor()
     try:
-      cursor.execute(scripSQL, *args)
+      cursor.execute(query=scripSQL, params=args)
       result = cursor.fetchall()
       return result
     
@@ -57,14 +57,15 @@ class PostgresSQL(DatabaseConection):
     conn = self.connect_db()
     cursor = conn.cursor()
     try:
-        cursor.execute(scripSQL, *args)
-        response = cursor.fetchone()[0]
-        conn.commit()
-        return {"res": response}
-      
+      print(scripSQL, args)
+      cursor.execute(query=scripSQL, params=args)
+      response = cursor.fetchone()[0]
+      print(response)
+      conn.commit()
+      return {"res": response}
     except Exception as e:
-        return {"Error": e}
+      return {"Error": e}
       
     finally:
-        cursor.close()
-        conn.close()
+      cursor.close()
+      conn.close()
