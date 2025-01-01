@@ -11,7 +11,7 @@ class FilterTask(BaseModel):
   description: Optional[str] = "%"
   task_ok: Optional[bool] = False
 
-class DeleteTask(BaseModel):
+class UniqueTask(BaseModel):
   id : str  
   
 router = APIRouter()
@@ -41,8 +41,16 @@ async def get_task(item : FilterTask):
   return data
 
 @router.delete("/delete_task/")
-async def delete_task(id_task: DeleteTask):
+async def delete_task(id_task: UniqueTask):
   """Delete tasks from the database by id"""
   db = DataBase(PostgresSQL())
   data = await db.sqlDML(QUERIES_TASKS.get("deleteTasks"), id_task.id)
+  return data
+
+@router.put("/alter_task/")
+async def alter_task(id_task : FilterTask):
+  """Alter status task"""
+  db = DataBase(PostgresSQL())
+  data = await db.sqlDML(QUERIES_TASKS.get("AlterTasks"), 
+                          id_task.category, id_task.description, id_task.task_ok, id_task.id)
   return data
